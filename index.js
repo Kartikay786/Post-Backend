@@ -22,7 +22,10 @@ app.use('/api/user',userRouter)
 
 // db connnection
 const Uri = process.env.URL ;
-mongoose.connect(Uri)
+mongoose.connect(Uri,{
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+})
 .then(()=>{
     console.log('Db connected');
 })
