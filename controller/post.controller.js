@@ -6,10 +6,11 @@ import User from '../models/user.model.js'
 
 const createPost = async (req,res) =>{
     const {title,content,tags } = req.body ;
-    const userId = req.user.id ;
+    const userId = req.user ? req.user.id : null;
+     
 
     try{
-        if(!title || !content || !tags || !userId){
+        if(!title || !content || !tags){
             return res.status(400).json('Please provide all data');
         }
         const post = new Post({title,content,tags,author:userId});
@@ -38,6 +39,7 @@ const getPost = async (req,res)=>{
         return res.status(200).json(post);
     }
     catch(err){
+        console.log(err);
         return res.status(500).json({message:'Server Error'});
     }
 }

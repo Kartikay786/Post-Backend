@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const commentSchema = new mongoose.Schema({
-    Comment:{
+    comment:{
         type:String,
         required:true
     },
@@ -13,7 +13,7 @@ const commentSchema = new mongoose.Schema({
     author:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'User',
-        required:true
+        // required:true
     }
 },{timestamps:true})
 

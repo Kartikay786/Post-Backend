@@ -5,12 +5,15 @@ import mongoose from 'mongoose';
 import postRouter from './router/post.router.js';
 import commentRouter from './router/comment.router.js'
 import userRouter from './router/user.router.js'
+import cors from 'cors'
 
 dotenv.config();
 
 const app = express();
 
+
 app.use(express.json());
+app.use(cors());
 
 // routes
 app.use('/api/post',postRouter);
