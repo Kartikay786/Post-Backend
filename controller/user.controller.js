@@ -57,7 +57,7 @@
 // export {sendOtp,register}
 
 import userModel from "../models/user.model.js";
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import validator from "validator";
 
