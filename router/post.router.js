@@ -4,7 +4,7 @@ import authenticate from '../utils/authorization.js';
 
 const router = express.Router();
 
-router.post('/',authenticate,createPost);  
+router.post('/:userId',authenticate,createPost);  
 router.get('/:postid',authenticate,getPost);
 router.get('/',getPostnPagination);
 router.put('/:id',authenticate,updatePost);

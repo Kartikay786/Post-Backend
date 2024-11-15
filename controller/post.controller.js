@@ -6,10 +6,10 @@ import User from '../models/user.model.js'
 
 const createPost = async (req,res) =>{
     const {title,content,tags } = req.body ;
-    const userId = req.user ? req.user.id : null;
+    const userId = req.params.userId;
      
 
-    try{
+    try{    
         if(!title || !content || !tags){
             return res.status(400).json('Please provide all data');
         }
