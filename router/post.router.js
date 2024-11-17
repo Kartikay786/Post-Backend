@@ -5,7 +5,7 @@ import authenticate from '../utils/authorization.js';
 const router = express.Router();
 
 router.post('/:userId',authenticate,createPost);  
-router.get('/:postid',authenticate,getPost);
+router.get('/:id',getPost);
 router.get('/',getPostnPagination);
 router.put('/:id',authenticate,updatePost);
 router.delete('/:id',authenticate,deletePost);

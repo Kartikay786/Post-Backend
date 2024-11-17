@@ -27,15 +27,14 @@ const createPost = async (req,res) =>{
 // get all post 
 
 const getPost = async (req,res)=>{
-    const {postId} = req.params.postid ;
-
+    const userId = req.params.id;
+    console.log(userId);
     try{
-        const post = await Post.findById({postId});
-
+        const post = await Post.find({author:userId});
         if(!post){
             return res.status(400).json({message:'Post not find'});
         }
-
+        console.log(post);
         return res.status(200).json(post);
     }
     catch(err){
