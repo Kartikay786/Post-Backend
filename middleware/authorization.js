@@ -9,9 +9,13 @@ const authenticate = (req, res, next) => {
    
     try {
         const decoded = jwt.verify(token, process.env.Secret_key);
-        
-        req.user = decoded; // Attach the decoded user data to req.user
-        next();
+        req.user ={
+            userId : decoded._id,
+            image : decoded.image,
+            name : decoded.name
+        };
+         // Attach the decoded user data to req.user
+         next();
     } catch (error) {
         return res.status(401).json({ message: "Invalid Token" });
     }

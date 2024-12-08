@@ -1,11 +1,6 @@
 import mongoose from "mongoose";
 
 const postSchema = new mongoose.Schema({
-    title:{
-        type:String,
-        required:true,
-        unique:true
-    },
     content:{
         type:String,
         required:true,
@@ -13,9 +8,26 @@ const postSchema = new mongoose.Schema({
     author:{
         type: mongoose.Schema.Types.ObjectId,
         ref:'User',
-        // required:true
+        required:true
     },
-    tags:[String]
+    authorImg : {
+       type:mongoose.Schema.Types.String,
+       ref:'User',
+       required:true
+    },
+    authorName:{
+        type : mongoose.Schema.Types.String,
+        ref:'User',
+        required:true
+    },
+    image:{
+        type:String
+    },
+    likes: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }],
+  
 },{timestamps:true})
 
 
