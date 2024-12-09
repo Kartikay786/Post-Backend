@@ -22,7 +22,6 @@
         },
         image:{
             type:String,
-            required:true
         },
         likes: [{
             type: mongoose.Schema.Types.ObjectId,
