@@ -1,7 +1,7 @@
 import {createPost,getPost,getallPost,updatePost,deletePost, likeadd} from '../controller/post.controller.js'
 import express from 'express'
 import authenticate from '../middleware/authorization.js';
-import { upload } from '../middleware/multer.js';
+import { upload } from '../utils/cloudinary.js';
 
 const router = express.Router();
 

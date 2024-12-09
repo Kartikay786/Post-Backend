@@ -14,20 +14,10 @@ const gentoken = (_id,image,name) => {
 
 const registerUser = async (req, res) => {
     const { name, email, password } = req.body;
-    let imageUrl = req.file;
+    const image = req.file.path ;
 
     try {
-        if (req.file) {
-            const result = await cloudinary.uploader.upload(
-                req.file.path, {
-                resource_type: 'image',
-            })
-
-            imageUrl = result.secure_url;
-
-            fs.unlinkSync(req.file.path);
-        }
-       
+        
         let user = await userModel.findOne({ email });
         if (user) {
             console.log('User Already Registered');
@@ -39,13 +29,13 @@ const registerUser = async (req, res) => {
 
         // if(!validator.isStrongPassword(password)) return res.json({message:'Password must be strong'});
 
-        user = new userModel({ name, email, password,image:imageUrl });
+        user = new userModel({ name, email, password,image});
 
         const salt = await bcrypt.genSalt(10)
         user.password = await bcrypt.hash(user.password, salt);
 
         await user.save();
-        console.log(user);
+        // console.log(user);
         const token = gentoken(user._id,user.image,user.name)
 
         return res.status(200).json({ token });

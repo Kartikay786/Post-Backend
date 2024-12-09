@@ -10,22 +10,14 @@ const createPost = async (req, res) => {
     const authimg = req.user.image;
     const authName = req.user.name;
     const userId = req.user.userId;
-    let image = req.file;
+   
 
+    console.log(req.file); // Log to check the uploaded file
+    console.log(req.body); 
+
+    const image = req.file.path;
 
     try {
-        if (req.file) {
-            const result = await cloudinary.uploader.upload(req.file.path, {
-                resource_type: 'image'
-            })
-
-            image = result.secure_url;
-
-            fs.unlinkSync(req.file.path)
-        }
-        // if(!content){
-        //     return res.status(400).json('Please provide all data');
-        // }
         const post = await new Post({ content, author: userId, image, authorImg: authimg, authorName: authName });
 
         await post.save();

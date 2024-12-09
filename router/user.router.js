@@ -1,8 +1,7 @@
 import express from 'express'
 // import {sendOtp,register} from '../controller/user.controller.js'
 import {registerUser,loginUser,findUser} from '../controller/user.controller.js'
-import { upload } from '../middleware/multer.js';
-
+import { upload } from '../utils/cloudinary.js';
 const router = express.Router();
 
 // router.post('/sendotp',sendOtp);
