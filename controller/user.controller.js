@@ -103,7 +103,6 @@ const getUsers = async (req, res) => {
 const userUpdate = async (req,res) => {
     const {name} = req.body ;
     const userId = req.user.userId;
-    const image = req.file.path;
 
     try{
         const user = await User.findById(userId);
@@ -111,6 +110,26 @@ const userUpdate = async (req,res) => {
         if(!user) return res.status(400).json({message:'Login firstly'});
 
         user.name = name || user.name;
+        await user.save();
+
+        return res.status(200).json({message:'Profile updated',user});
+    }
+    catch (err) {
+        return res.status(500).json({ message: 'Error updating profile', err });
+    }
+}
+
+const pfpUpdate = async (req,res) => {
+    const userId = req.user.userId;
+    const image = req.file.path;
+
+    try{
+        const user = await User.findById(userId);
+
+        if(!user) return res.status(400).json({message:'Login firstly'});
+
+        if(!image) return res.status(404).json({message:'Please select image'});
+        
         user.image = image || user.image;
         await user.save();
 
@@ -122,4 +141,4 @@ const userUpdate = async (req,res) => {
 }
 
 
-export { registerUser, loginUser, findUser, getUsers ,userUpdate};
+export { registerUser, loginUser, findUser, getUsers ,userUpdate,pfpUpdate};
