@@ -103,7 +103,7 @@ const getUsers = async (req, res) => {
 const userUpdate = async (req,res) => {
     const {name} = req.body ;
     const userId = req.user.userId;
-    const image = req.file;
+    const image = req.file.path;
 
     try{
         const user = await User.findById(userId);
