@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken'
 import validator from "validator";
 import cloudinary from '../utils/cloudinary.js'
 import fs from 'fs'
+import User from "../models/user.model.js";
 
 const gentoken = (_id,image,name) => {
     const jwtkey = process.env.Secret_key;
@@ -99,4 +100,26 @@ const getUsers = async (req, res) => {
     }
 }
 
-export { registerUser, loginUser, findUser, getUsers };
+const userUpdate = async (req,res) => {
+    const {name} = req.body ;
+    const userId = req.user.userId;
+    const image = req.file;
+
+    try{
+        const user = await User.findById(userId);
+
+        if(!user) return res.status(400).json({message:'Login firstly'});
+
+        user.name = name || user.name;
+        user.image = image || user.image;
+        await user.save();
+
+        return res.status(200).json({message:'Profile updated',user});
+    }
+    catch (err) {
+        return res.status(500).json({ message: 'Error updating profile', err });
+    }
+}
+
+
+export { registerUser, loginUser, findUser, getUsers ,userUpdate};

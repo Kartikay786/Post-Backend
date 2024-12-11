@@ -65,7 +65,7 @@ const getallPost = async (req, res) => {
 // update post 
 
 const updatePost = async (req, res) => {
-    const { title, content, tags } = req.body;
+    const { title, content} = req.body;
     const postId = req.params.id;
     const userId = req.user.id;
 
@@ -121,12 +121,12 @@ const likeadd = async (req,res) => {
         const post = await Post.findById(_id);
         console.log(post);
 
-        // if(post.likes.include(userId)){
-        //     post.likes =post.likes.filter(id=> id.toString() != userId);
-        // }
-        // else{
-        //     post.likes.push(userId)
-        // }
+        if(post.likes.include(userId)){
+            post.likes =post.likes.filter(id=> id.toString() != userId);
+        }
+        else{
+            post.likes.push(userId)
+        }
         post.likes.push(userId)
 
         await post.save();
