@@ -15,7 +15,7 @@ const createPost = async (req, res) => {
     console.log(req.file); // Log to check the uploaded file
     console.log(req.body); 
 
-    const image = req.file.path;
+    const image = req.file ? req.file.path : null; 
 
     try {
         const post = await new Post({ content, author: userId, image, authorImg: authimg, authorName: authName });
